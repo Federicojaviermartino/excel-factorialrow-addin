@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+           xsi:type="TaskPaneApp">
+  <Id>1f2d7b7c-1111-4a6a-9b5b-aaaabbbbcccc</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Sample</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="FactorialRow Add-in"/>
+  <Description DefaultValue="Custom function TESTVELIXO.FACTORIALROW with row/column toggle and caching."/>
+  <IconUrl DefaultValue="http://localhost:3000/taskpane.html"/>
+  <SupportUrl DefaultValue="http://localhost:3000/"/>
+  <AppDomains>
+    <AppDomain>http://localhost:3000</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="http://localhost:3000/taskpane.html"/>
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_1">
+    <Requirements>
+      <Sets DefaultMinVersion="1.1">
+        <Set Name="SharedRuntime" MinVersion="1.1"/>
+      </Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <Runtimes>
+          <Runtime resid="ContosoAddin.Url" lifetime="long" />
+        </Runtimes>
+        <AllFormFactors>
+          <ExtensionPoint xsi:type="CustomFunctions">
+            <Script>
+              <SourceLocation resid="ContosoAddin.Url"/>
+            </Script>
+            <Page>
+              <SourceLocation resid="Taskpane.Url"/>
+            </Page>
+            <Metadata>
+              <SourceLocation resid="Functions.Metadata.Url"/>
+            </Metadata>
+            <Namespace resid="ContosoAddin.Namespace"/>
+          </ExtensionPoint>
+        </AllFormFactors>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="http://localhost:3000/taskpane.html"/>
+        <bt:Image id="Icon.32x32" DefaultValue="http://localhost:3000/taskpane.html"/>
+        <bt:Image id="Icon.80x80" DefaultValue="http://localhost:3000/taskpane.html"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="ContosoAddin.Url" DefaultValue="http://localhost:3000/functions.bundle.js"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="http://localhost:3000/taskpane.html"/>
+        <bt:Url id="Functions.Metadata.Url" DefaultValue="http://localhost:3000/functions.json"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="ContosoAddin.Namespace" DefaultValue="TESTVELIXO"/>
+        <bt:String id="Functions.Tooltip" DefaultValue="Factorial functions"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Functions.Description" DefaultValue="Custom functions for factorial calculations"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

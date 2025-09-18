@@ -1,0 +1,57 @@
+{
+  "name": "excel-factorialrow-addin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Excel add-in with Office.js shared runtime, custom function TESTVELIXO.FACTORIALROW, task pane toggle (row/column), caching, BigInt up to 500, optional Web Worker.",
+  "scripts": {
+    "clean": "node clean.js",
+    "build": "webpack --mode development && node copy-files.js",
+    "build:clean": "node clean.js && webpack --mode development && node copy-files.js",
+    "build:prod": "webpack --mode production && node copy-files.js",
+    "dev": "webpack --mode development --watch",
+    "start": "npm run dev",
+    "serve": "node native-server.js",
+    "serve-express": "node simple-server.js",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint:check": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "quality": "npm run lint:check && npm run format:check && npm run test:ci",
+    "precommit": "npm run quality"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "html-webpack-plugin": "^5.5.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^22.1.0",
+    "prettier": "^3.3.2",
+    "source-map-loader": "^4.0.1",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.4.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "resolutions": {
+    "ajv": "8.12.0"
+  }
+}

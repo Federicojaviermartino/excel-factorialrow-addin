@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+
+# Temporary/cleanup files
+cleanup-project.js
+remove-duplicates.js
+final-cleanup.js
+quality-check.js
+build-utils.js
+*.tmp
+
+# Duplicate/backup files (keep only main versions)
+manifest-fixed.xml
+custom-functions-simple.js
+functions-simple.json
+webpack.minimal.js
+start-server.bat
+server.js
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# Jest cache
+.jest/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# ESLint cache
+.eslintcache
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Office Add-in certificates
+certs/
+
+# Package-lock conflicts (optional - remove if you want to commit it)
+# package-lock.json
