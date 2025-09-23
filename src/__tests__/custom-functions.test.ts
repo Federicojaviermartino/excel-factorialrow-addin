@@ -1,6 +1,6 @@
 import { factorialBigIntString } from '../custom-functions-new';
 
-describe('factorialBigIntString', () => {
+describe('factorialBigIntString - Core Business Logic', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });

@@ -12,7 +12,7 @@
             "parameters": [
                 {
                     "name": "N",
-                    "description": "Maximum factorial value to calculate (integer, >= 0)",
+                    "description": "Maximum factorial value to calculate (integer, >= 0, <= 500)",
                     "type": "number",
                     "dimensionality": "scalar"
                 }
@@ -34,51 +34,7 @@
             "parameters": [
                 {
                     "name": "N",
-                    "description": "Maximum factorial value to calculate using Web Worker (integer, >= 0)",
-                    "type": "number",
-                    "dimensionality": "scalar"
-                }
-            ],
-            "options": {
-                "stream": false,
-                "cancelable": false
-            }
-        },
-        {
-            "id": "TESTFUNC",
-            "name": "TESTFUNC",
-            "description": "Simple test function that returns [1, 2, 3, N]",
-            "helpUrl": "http://localhost:3000/",
-            "result": {
-                "type": "array",
-                "dimensionality": "matrix"
-            },
-            "parameters": [
-                {
-                    "name": "N",
-                    "description": "A number to include in the result",
-                    "type": "number",
-                    "dimensionality": "scalar"
-                }
-            ],
-            "options": {
-                "stream": false,
-                "cancelable": false
-            }
-        },
-        {
-            "id": "SIMPLETEST",
-            "name": "SIMPLETEST",
-            "description": "Simple test function that returns N * 2",
-            "helpUrl": "http://localhost:3000/",
-            "result": {
-                "type": "number",
-                "dimensionality": "scalar"
-            },
-            "parameters": [
-                {
-                    "name": "N",
-                    "description": "A number to double",
+                    "description": "Maximum factorial value to calculate using Web Worker (integer, >= 0, <= 500)",
                     "type": "number",
                     "dimensionality": "scalar"
                 }

@@ -13,7 +13,6 @@ cleanup-project.js
 remove-duplicates.js
 final-cleanup.js
 quality-check.js
-build-utils.js
 *.tmp
 
 # Duplicate/backup files (keep only main versions)

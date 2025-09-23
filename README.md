@@ -93,8 +93,6 @@ dist/                          # Built assets (generated)
 ```typescript
 export async function FACTORIALROW(N: number): Promise<string[][]>
 export async function FACTORIALROW_WORKER(N: number): Promise<string[][]>
-export function TESTFUNC(N: number): number[][]
-export function SIMPLETEST(N: number): number
 export function factorialBigIntString(n: number): string
 ```
 

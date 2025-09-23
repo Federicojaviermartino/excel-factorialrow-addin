@@ -142,26 +142,7 @@ export async function FACTORIALROW_WORKER(N: number): Promise<string[][]> {
     });
 }
 
-/**
- * TEST FUNCTION - Simple version
- * @customfunction
- * @param N A number
- * @returns Simple test result
- */
-export function TESTFUNC(N: number): number[][] {
-    return [[1, 2, 3, N]];
-}
-
-/**
- * SIMPLE TEST - Basic function
- * @customfunction
- * @param N A number
- * @returns A simple number
- */
-export function SIMPLETEST(N: number): number {
-    return N * 2;
-}
-
+// Function registration - production ready
 (function () {
     if (process.env.NODE_ENV !== 'test') {
         console.log('🚀 Starting function registration...');
@@ -169,112 +150,106 @@ export function SIMPLETEST(N: number): number {
 
     const global = (typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : globalThis) as any;
 
+    // Register in TESTVELIXO namespace
     if (!global.TESTVELIXO) {
         global.TESTVELIXO = {};
     }
-
     global.TESTVELIXO.FACTORIALROW = FACTORIALROW;
     global.TESTVELIXO.FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-    global.TESTVELIXO.TESTFUNC = TESTFUNC;
 
+    // Register globally for fallback
     global.FACTORIALROW = FACTORIALROW;
     global.FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-    global.TESTFUNC = TESTFUNC;
 
     if (process.env.NODE_ENV !== 'test') {
-        console.log('✅ Functions registered directly to global scope');
+        console.log('✅ Functions registered to global scope');
     }
     
+    // Register to window if available
     if (typeof window !== 'undefined') {
         (window as any).TESTVELIXO = global.TESTVELIXO;
         (window as any).FACTORIALROW = FACTORIALROW;
         (window as any).FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-        (window as any).TESTFUNC = TESTFUNC;
         if (process.env.NODE_ENV !== 'test') {
             console.log('✅ Functions registered to window');
         }
     }
 
+    // Register to self if available (for Web Workers)
     if (typeof self !== 'undefined') {
         (self as any).TESTVELIXO = global.TESTVELIXO;
         (self as any).FACTORIALROW = FACTORIALROW;
         (self as any).FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-        (self as any).TESTFUNC = TESTFUNC;
         if (process.env.NODE_ENV !== 'test') {
             console.log('✅ Functions registered to self');
         }
     }
     
-    if (typeof CustomFunctions !== 'undefined') {
-        if (CustomFunctions.associate) {
-            try {
-                CustomFunctions.associate('FACTORIALROW', FACTORIALROW);
-                CustomFunctions.associate('FACTORIALROW_WORKER', FACTORIALROW_WORKER);
-                CustomFunctions.associate('TESTFUNC', TESTFUNC);
-                if (process.env.NODE_ENV !== 'test') {
-                    console.log('✅ Functions registered via CustomFunctions.associate');
-                }
-            } catch (e) {
-                console.warn('⚠️ CustomFunctions.associate failed:', e);
+    // Register with Excel's CustomFunctions API if available
+    if (typeof CustomFunctions !== 'undefined' && CustomFunctions.associate) {
+        try {
+            CustomFunctions.associate('FACTORIALROW', FACTORIALROW);
+            CustomFunctions.associate('FACTORIALROW_WORKER', FACTORIALROW_WORKER);
+            if (process.env.NODE_ENV !== 'test') {
+                console.log('✅ Functions registered via CustomFunctions.associate');
             }
+        } catch (e) {
+            console.warn('⚠️ CustomFunctions.associate failed:', e);
         }
-    } else {
-        if (process.env.NODE_ENV !== 'test') {
-            console.warn('⚠️ CustomFunctions not available yet');
-        }
+    } else if (process.env.NODE_ENV !== 'test') {
+        console.warn('⚠️ CustomFunctions not available yet');
     }
 
+    // Delayed registration for Excel environments that load CustomFunctions later
     setTimeout(() => {
         if (typeof CustomFunctions !== 'undefined' && CustomFunctions.associate) {
             try {
                 CustomFunctions.associate('FACTORIALROW', FACTORIALROW);
                 CustomFunctions.associate('FACTORIALROW_WORKER', FACTORIALROW_WORKER);
-                CustomFunctions.associate('TESTFUNC', TESTFUNC);
                 console.log('✅ Functions registered via delayed CustomFunctions.associate');
             } catch (e) {
                 console.warn('⚠️ Delayed CustomFunctions.associate failed:', e);
             }
         }
 
+        // Ensure global registration
         global.FACTORIALROW = FACTORIALROW;
         global.FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-        global.TESTFUNC = TESTFUNC;
         console.log('✅ Delayed registration complete');
     }, 100);
 
+    // Even more delayed registration for Excel Desktop compatibility
     setTimeout(() => {
         global.FACTORIALROW = FACTORIALROW;
         global.FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-        global.TESTFUNC = TESTFUNC;
         if (typeof CustomFunctions !== 'undefined' && CustomFunctions.associate) {
             try {
                 CustomFunctions.associate('FACTORIALROW', FACTORIALROW);
                 CustomFunctions.associate('FACTORIALROW_WORKER', FACTORIALROW_WORKER);
-                CustomFunctions.associate('TESTFUNC', TESTFUNC);
                 console.log('✅ Very delayed CustomFunctions.associate succeeded');
             } catch (e) {
                 console.warn('⚠️ Very delayed CustomFunctions.associate failed:', e);
             }
         }
-    }, 500);    console.log('🔧 Function registration complete');
+    }, 500);
+
+    console.log('🔧 Function registration complete');
     if (process.env.NODE_ENV !== 'test') {
         console.log('📋 TESTVELIXO namespace functions:', Object.keys(global.TESTVELIXO || {}));
         console.log('🔍 Global FACTORIALROW type:', typeof global.FACTORIALROW);
         console.log('🔍 Global FACTORIALROW_WORKER type:', typeof global.FACTORIALROW_WORKER);
-        console.log('🔍 Global TESTFUNC type:', typeof global.TESTFUNC);
     }
 
+    // Register when Office.js is ready
     if (typeof Office !== 'undefined') {
         Office.onReady(() => {
             console.log('📚 Office.js is ready, functions should be available');
             global.FACTORIALROW = FACTORIALROW;
             global.FACTORIALROW_WORKER = FACTORIALROW_WORKER;
-            global.TESTFUNC = TESTFUNC;
             if (typeof CustomFunctions !== 'undefined' && CustomFunctions.associate) {
                 try {
                     CustomFunctions.associate('FACTORIALROW', FACTORIALROW);
                     CustomFunctions.associate('FACTORIALROW_WORKER', FACTORIALROW_WORKER);
-                    CustomFunctions.associate('TESTFUNC', TESTFUNC);
                     console.log('✅ Office.onReady CustomFunctions.associate succeeded');
                 } catch (e) {
                     console.warn('⚠️ Office.onReady CustomFunctions.associate failed:', e);
@@ -282,13 +257,4 @@ export function SIMPLETEST(N: number): number {
             }
         });
     }
-})();
-
-(function () {
-    const global = (typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : globalThis) as any;
-    global.SIMPLETEST = SIMPLETEST;
-    if (!global.TESTVELIXO) global.TESTVELIXO = {};
-    global.TESTVELIXO.SIMPLETEST = SIMPLETEST;
-
-    console.log('✅ SIMPLETEST registered:', typeof global.SIMPLETEST);
 })();
